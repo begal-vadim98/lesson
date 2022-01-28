@@ -13,11 +13,11 @@ console.log(`Стоимость верстки экранов: ${screenPrice} р
 console.log(`Стоимость разработки сайта: ${fullPrice} рублей`);
 
 // Создаем функцию для перевода строки и разбивки ее на массив
-const funScreens = (element) => {
-  element = screens.toLowerCase();
-  element = element.split(",");
-  console.log(element);
+const funScreens = (screens) => {
+  screens = screens.toLowerCase().split(/\s*,\s*/);
+  console.log(screens);
 }
-funScreens();
+funScreens(screens);
+
 
 console.log(`Процент отката посреднику за работу: ${fullPrice * (rollback / 100)}`);
