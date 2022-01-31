@@ -51,5 +51,6 @@ console.log(`Типы данных: ${typeof title}, ${typeof fullPrice}, ${type
 console.log(`Длина строки: ${screens.length}`);
 console.log(`Стоимость верстки экранов: ${screenPrice} рублей`);
 console.log(`Стоимость разработки сайта: ${fullPrice} рублей`);
+console.log(`Стоимость разработки сайта c учетом вычета отката: ${servicePercentPrice} рублей`);
 console.log(screens.toLowerCase().split(/\s* \s*/));
 console.log(`Процент отката посреднику за работу: ${Math.ceil((fullPrice * (rollback / 100)))}`);
