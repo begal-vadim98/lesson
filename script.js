@@ -17,8 +17,16 @@ const  title = prompt("Как называется ваш проект?"),
       console.log("Даем скидку в 10%");
       break;
 
+    case fullPrice === 30000:
+      console.log("Ваша стоимость 30000р");
+      break;
+
     case 15000 < fullPrice && fullPrice < 30000:
       console.log("Даем скидку в 5%");
+      break;
+
+    case fullPrice === 15000:
+      console.log("Ваша стоимость 15000р");
       break;
 
     case 0 < fullPrice && fullPrice < 15000:
@@ -29,20 +37,13 @@ const  title = prompt("Как называется ваш проект?"),
       console.log("Стоимость равна 0");
       break;
 
-    case fullPrice === 15000:
-      console.log("Скидка 4.9%");
-      break;
-
-    case fullPrice === 30000:
-      console.log("Скидка практически увелицилась больше 10%");
-      break;
-
     case fullPrice < 0:
       console.log("Что то пошло не так");
       break;
     default:
       console.log("default");
   }
+
 
 console.log(`Типы данных: ${typeof title}, ${typeof fullPrice}, ${typeof adaptive}`);
 console.log(`Длина строки: ${screens.length}`);
