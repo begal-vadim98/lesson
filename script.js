@@ -24,9 +24,11 @@ const fullPrice = getFullPrice(screenPrice, allServicePrices);
 
 // Функция возвращает title меняя его 
 const getTitle = function(documentTitle) {
-  
-  const OneLetter = documentTitle.trim().substring(0, 1).toUpperCase();
-  return OneLetter + documentTitle.trim().substring(1, documentTitle.length).toLowerCase();
+
+  const removingSpaces = documentTitle.trim(),
+    OneLetter = removingSpaces[0].toUpperCase();
+    
+  return OneLetter + removingSpaces.slice(1).toLowerCase();
     
 }
 
