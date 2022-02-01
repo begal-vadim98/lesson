@@ -1,41 +1,70 @@
 'use strict'
 
-const  title = prompt("Как называется ваш проект?"),
+const title = prompt("Как называется ваш проект?"),
   screens = prompt("Какие типы экранов нужно разработать??", "Простые, Сложные, Интерактивные"),
   screenPrice = +prompt("Сколько будет стоить данная работа?", 12000),
-  adaptive = !!confirm("Нужен ли адаптив на сайте?"),
+  adaptive = confirm("Нужен ли адаптив на сайте?"),
   additionalServiceOne = prompt("Какой дополнительный тип услуги нужен?"),
   priceServiceOne = +prompt("Сколько это будет стоить?"),
   additionalServiceTwo = prompt("Какой дополнительный тип услуги нужен?"),
   priceServiceTwo = +prompt("Сколько это будет стоить?"),
-  rollback = 10,
-  fullPrice = screenPrice + priceServiceOne + priceServiceTwo,
-  servicePercentPrice = fullPrice -  Math.ceil((fullPrice * (rollback / 100)));
+  rollback = 10;
 
-// Конструкция условий
+// Функция возвращает сумму всех дополнительных услуг
+const getAllServicePrices = function(expressionOne, expressionTwo) {
+  return expressionOne + expressionTwo;
+}
+const allServicePrices = getAllServicePrices(priceServiceOne,priceServiceTwo);
+
+// Функция возвращает сумму стоимости верстки и стоимости дополнительных услуг 
+function getFullPrice(priceWork, amountServices) {
+  return priceWork + amountServices;
+}
+const fullPrice = getFullPrice(screenPrice, allServicePrices);
+
+// Функция возвращает title меняя его 
+const getTitle = function(documentTitle) {
+  
+  const OneLetter = documentTitle.trim().substring(0, 1).toUpperCase();
+  return OneLetter + documentTitle.trim().substring(1, documentTitle.length).toLowerCase();
+    
+}
+
+// getServicePercentPrices
+const getServicePercentPrices = function(amount, percent) {
+
+  return amount -  Math.ceil((amount * (percent / 100)));
+
+}
+
+const showTypeOf = function(variables) {
+
+  return `${variables} : ${typeof variables}`
+
+}
+
+const getRollbackMessage = function(amount) {
+
   switch (true) {
 
-    case fullPrice > 30000:
-      console.log("Даем скидку в 10%");
+    case amount > 30000:
+      return "Даем скидку в 10%";
       break;
-
-    case 15000 < fullPrice && fullPrice <= 30000:
-      console.log("Даем скидку в 5%");
+  
+    case 15000 < amount && amount <= 30000:
+      return "Даем скидку в 5%";
       break;
-
-    case 0 <= fullPrice && fullPrice <= 15000:
-      console.log("Скидка не предусмотрена!");
+  
+    case 0 <= amount && amount <= 15000:
+      return "Скидка не предусмотрена!";
       break;
-
+  
     default:
-      console.log("Что то пошло не так");
+      return "Что то пошло не так";
   }
-
-
-console.log(`Типы данных: ${typeof title}, ${typeof fullPrice}, ${typeof adaptive}`);
-console.log(`Длина строки: ${screens.length}`);
-console.log(`Стоимость верстки экранов: ${screenPrice} рублей`);
-console.log(`Стоимость разработки сайта: ${fullPrice} рублей`);
-console.log(`Стоимость разработки сайта c учетом вычета отката: ${servicePercentPrice} рублей`);
+  
+}
+console.log(`Типы данных: ${showTypeOf(getTitle(title))}, ${showTypeOf(fullPrice)}, ${showTypeOf(adaptive)}`);
 console.log(screens.toLowerCase().split(/\s* \s*/));
-console.log(`Процент отката посреднику за работу: ${Math.ceil((fullPrice * (rollback / 100)))}`);
+console.log(getRollbackMessage(fullPrice));
+console.log(`Стоимость разработки сайта c учетом вычета отката: ${getServicePercentPrices(fullPrice, rollback)} рублей`);
