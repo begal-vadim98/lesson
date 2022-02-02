@@ -1,26 +1,90 @@
 'use strict'
 
-const title = prompt("Как называется ваш проект?"),
+let  rollback = 10,
+  title,
+  screens,
+  screenPrice,
+  allServicePrices,
+  adaptive,
+  fullPrice,
+  servicePercentPrice,
+  additionalServiceOne,
+  additionalServiceTwo;
+
+const isNumber = function(num) {
+  
+  if(num === null || num[0] === " ")  return false;
+  
+  return !isNaN(parseFloat(num)) && isFinite(num) ;
+}
+
+const asking = function () {
+  title = prompt("Как называется ваш проект?", "Lesson"),
   screens = prompt("Какие типы экранов нужно разработать??", "Простые, Сложные, Интерактивные"),
-  screenPrice = +prompt("Сколько будет стоить данная работа?", 12000),
-  adaptive = confirm("Нужен ли адаптив на сайте?"),
-  additionalServiceOne = prompt("Какой дополнительный тип услуги нужен?"),
-  priceServiceOne = +prompt("Сколько это будет стоить?"),
-  additionalServiceTwo = prompt("Какой дополнительный тип услуги нужен?"),
-  priceServiceTwo = +prompt("Сколько это будет стоить?"),
-  rollback = 10;
+  screenPrice = prompt("Сколько будет стоить данная работа?", "12000");
+
+  do {
+    screenPrice = prompt("Сколько будет стоить данная работа?", "12000");
+  } while (!isNumber(screenPrice));
+
+  screenPrice = parseFloat(screenPrice);
+
+ adaptive = confirm("Нужен ли адаптив на сайте?");
+
+}
+
 
 // Функция возвращает сумму всех дополнительных услуг
-const getAllServicePrices = function(expressionOne, expressionTwo) {
-  return expressionOne + expressionTwo;
-}
-const allServicePrices = getAllServicePrices(priceServiceOne,priceServiceTwo);
+const getAllServicePrices = function() {
+  let sum = 0,
+    sumNumber;
 
-// Функция возвращает сумму стоимости верстки и стоимости дополнительных услуг 
-function getFullPrice(priceWork, amountServices) {
-  return priceWork + amountServices;
+  for (let i = 0; i < 2; i++) {
+
+    if( i === 0)  additionalServiceOne = prompt("Какой дополнительный тип услуги необходим", "Слайдер");
+
+    do {
+      
+      sumNumber = prompt("Сколько это будет стоить?", "1000");
+      sumNumber = parseFloat(sumNumber);
+    } while(!isNumber(sumNumber));
+
+    sum += sumNumber;
+    
+    if( i === 1)  additionalServiceTwo = prompt("Какой дополнительный тип услуги необходим", "Калькулятор");
+      do {
+        sumNumber = prompt("Сколько это будет стоить?", "1000");
+        sumNumber = parseFloat(sumNumber);
+      } while(!isNumber(sumNumber));
+
+      sum += sumNumber;
+    } 
+  return sum
 }
-const fullPrice = getFullPrice(screenPrice, allServicePrices);
+
+
+
+
+
+
+const showTypeOf = function(variables) {
+
+  return `${variables} : ${typeof variables}`
+
+}
+// Функция возвращает сумму стоимости верстки и стоимости дополнительных услуг 
+const getFullPrice = function (priceWork, amountServices) {
+  
+  return priceWork + amountServices;
+
+}
+
+// getServicePercentPrices
+const getServicePercentPrices = function(amount, percent) {
+
+  return (amount) -  Math.ceil((amount * (percent / 100)));
+
+}
 
 // Функция возвращает title меняя его 
 const getTitle = function(documentTitle) {
@@ -32,18 +96,6 @@ const getTitle = function(documentTitle) {
     
 }
 
-// getServicePercentPrices
-const getServicePercentPrices = function(amount, percent) {
-
-  return amount -  Math.ceil((amount * (percent / 100)));
-
-}
-
-const showTypeOf = function(variables) {
-
-  return `${variables} : ${typeof variables}`
-
-}
 
 const getRollbackMessage = function(amount) {
 
@@ -66,6 +118,13 @@ const getRollbackMessage = function(amount) {
   }
   
 }
+// Переопределение переменных
+asking();
+allServicePrices = getAllServicePrices();
+fullPrice = getFullPrice(screenPrice, allServicePrices);
+servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
+
+console.log(screenPrice, allServicePrices, fullPrice )
 console.log(`Типы данных: ${showTypeOf(getTitle(title))}, ${showTypeOf(fullPrice)}, ${showTypeOf(adaptive)}`);
 console.log(screens.toLowerCase().split(/\s* \s*/));
 console.log(getRollbackMessage(fullPrice));
