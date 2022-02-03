@@ -8,15 +8,12 @@ let  rollback = 10,
   adaptive,
   fullPrice,
   servicePercentPrice,
-  additionalService;
+  additionalServiceOne,
+  additionalServiceTwo;
 
 const isNumber = function(num) {
-  
-  if(!num || num[0] === " " || num[-1] === " ")  return false;
-  
-  return !isNaN(parseFloat(num)) && isFinite(num) ;
+  return !isNaN(parseFloat(num))  && isFinite(num) && !num.includes(" ");
 }
-console.log(isNumber(" 12 "))
 
 const asking = function () {
   title = prompt("Как называется ваш проект?", "Lesson"),
@@ -40,27 +37,25 @@ const getAllServicePrices = function() {
 
   for (let i = 0; i < 2; i++) {
 
-      additionalService = prompt("Какой дополнительный тип услуги необходим", `Услуга ${i + 1}`);
+      if(i === 0) additionalServiceOne = prompt("Какой дополнительный тип услуги необходим", `Услуга ${i + 1}`);
+
+      if(i === 1) additionalServiceTwo = prompt("Какой дополнительный тип услуги необходим", `Услуга ${i + 1}`);
       
       do {
-
         sumNumber = prompt("Сколько это будет стоить?", "1000");
 
       } while(!isNumber(sumNumber));
       
       sumNumber = parseFloat(sumNumber);
-      
+
+
       sum += sumNumber;
+
   } 
 
   return sum;
 
 }
-
-
-
-
-
 
 const showTypeOf = function(variables) {
 
@@ -91,7 +86,6 @@ const getTitle = function(documentTitle) {
     
 }
 
-
 const getRollbackMessage = function(amount) {
 
   switch (true) {
@@ -119,7 +113,9 @@ allServicePrices = getAllServicePrices();
 fullPrice = getFullPrice(screenPrice, allServicePrices);
 servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
 
-console.log(screenPrice, allServicePrices, fullPrice )
+
+console.log(additionalServiceOne, additionalServiceTwo);
+
 console.log(`Типы данных: ${showTypeOf(getTitle(title))}, ${showTypeOf(fullPrice)}, ${showTypeOf(adaptive)}`);
 console.log(screens.toLowerCase().split(/\s* \s*/));
 console.log(getRollbackMessage(fullPrice));
