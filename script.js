@@ -8,20 +8,19 @@ let  rollback = 10,
   adaptive,
   fullPrice,
   servicePercentPrice,
-  additionalServiceOne,
-  additionalServiceTwo;
+  additionalService;
 
 const isNumber = function(num) {
   
-  if(num === null || num[0] === " ")  return false;
+  if(!num || num[0] === " " || num[-1] === " ")  return false;
   
   return !isNaN(parseFloat(num)) && isFinite(num) ;
 }
+console.log(isNumber(" 12 "))
 
 const asking = function () {
   title = prompt("Как называется ваш проект?", "Lesson"),
-  screens = prompt("Какие типы экранов нужно разработать??", "Простые, Сложные, Интерактивные"),
-  screenPrice = prompt("Сколько будет стоить данная работа?", "12000");
+  screens = prompt("Какие типы экранов нужно разработать??", "Простые, Сложные, Интерактивные");
 
   do {
     screenPrice = prompt("Сколько будет стоить данная работа?", "12000");
@@ -29,7 +28,7 @@ const asking = function () {
 
   screenPrice = parseFloat(screenPrice);
 
- adaptive = confirm("Нужен ли адаптив на сайте?");
+  adaptive = confirm("Нужен ли адаптив на сайте?");
 
 }
 
@@ -41,25 +40,21 @@ const getAllServicePrices = function() {
 
   for (let i = 0; i < 2; i++) {
 
-    if( i === 0)  additionalServiceOne = prompt("Какой дополнительный тип услуги необходим", "Слайдер");
-
-    do {
+      additionalService = prompt("Какой дополнительный тип услуги необходим", `Услуга ${i + 1}`);
       
-      sumNumber = prompt("Сколько это будет стоить?", "1000");
-      sumNumber = parseFloat(sumNumber);
-    } while(!isNumber(sumNumber));
-
-    sum += sumNumber;
-    
-    if( i === 1)  additionalServiceTwo = prompt("Какой дополнительный тип услуги необходим", "Калькулятор");
       do {
-        sumNumber = prompt("Сколько это будет стоить?", "1000");
-        sumNumber = parseFloat(sumNumber);
-      } while(!isNumber(sumNumber));
 
+        sumNumber = prompt("Сколько это будет стоить?", "1000");
+
+      } while(!isNumber(sumNumber));
+      
+      sumNumber = parseFloat(sumNumber);
+      
       sum += sumNumber;
-    } 
-  return sum
+  } 
+
+  return sum;
+
 }
 
 
