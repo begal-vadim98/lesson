@@ -1,4 +1,27 @@
 'use strict'
+const documentTitle = document.getElementsByTagName('h1')[0],
+  calculateStartBtn = document.getElementsByClassName('handler_btn')[0],
+  calculateReseteBtn = document.getElementsByClassName('handler_btn')[1],
+  addScreenBtn = document.querySelector('.screen-btn'),
+  otherItemsPercent = document.querySelectorAll('.other-items.percent'),
+  otherItemsNumber = document.querySelectorAll('.other-items.number'),
+  inputTypeRange = document.querySelector('.rollback > .main-controls__range > input[type="range"]'),
+  rangeValue = document.querySelector('.rollback > .main-controls__range > .range-value'),
+  totalInput = document.getElementsByClassName('total-input')[0],
+  totalCount = document.getElementsByClassName('total-input')[1],
+  totalCountOuther = document.getElementsByClassName('total-input')[2],
+  totalFullCount = document.getElementsByClassName('total-input')[3],
+  totalCountRollback = document.getElementsByClassName('total-input')[4];
+
+console.log(documentTitle);
+console.log(calculateStartBtn, calculateReseteBtn);
+
+console.log(otherItemsPercent, otherItemsNumber);
+console.log(inputTypeRange, rangeValue);
+console.log(totalInput, totalCount,totalCountOuther, totalFullCount,totalCountRollback);
+
+let screenBlock = document.querySelectorAll('screen');
+  
 
 const appData = {
   rollback: 10,
@@ -159,4 +182,4 @@ const appData = {
 
 
 }
-appData.start();;
+// appData.start();
