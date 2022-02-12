@@ -132,6 +132,9 @@ const appData = {
 
   addScreenBlock: function () {
     const cloneScreen = screenBlock[0].cloneNode(true);
+
+    cloneScreen.querySelector('input').value = "";
+
     screenBlock[screenBlock.length - 1].after(cloneScreen);
     screenBlock.push(cloneScreen);
   },
