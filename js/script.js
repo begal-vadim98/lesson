@@ -16,9 +16,7 @@ const documentTitle = document.getElementsByTagName('h1')[0],
   totalCount = document.getElementsByClassName('total-input')[1],
   totalCountOuther = document.getElementsByClassName('total-input')[2],
   totalFullCount = document.getElementsByClassName('total-input')[3],
-  totalCountRollback = document.getElementsByClassName('total-input')[4],
-
-  viewsSelect = document.querySelectorAll('.views-select');
+  totalCountRollback = document.getElementsByClassName('total-input')[4];
 
 let screenBlock = Array.from(document.querySelectorAll('.screen'));
 
