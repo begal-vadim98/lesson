@@ -21,7 +21,8 @@ const documentTitle = document.getElementsByTagName('h1')[0],
   const cmsOpen = document.querySelector('#cms-open'),
     cmsVariants = document.querySelector('.hidden-cms-variants'),
     cmsSelect = cmsVariants.querySelector('#cms-select'),
-    cmsvariantInput = cmsVariants.querySelector('.main-controls__input ');
+    cmsvariantInput = cmsVariants.querySelector('.main-controls__input '),
+    cmsOtherInput = cmsvariantInput.querySelector('input');
 
 let screenBlock = Array.from(document.querySelectorAll('.screen'));
 
@@ -42,9 +43,9 @@ const appData = {
   additionalServiceNumber: {},
   init: function () {
 
-    for (let key in appData) {
-      if (typeof appData[key] == 'function') {
-        appData[key] = appData[key].bind(appData);
+    for (let key in this) {
+      if (typeof this[key] === 'function') {
+        this[key] = this[key].bind(this);
       }
     };
 
@@ -83,12 +84,8 @@ const appData = {
   },
 
   start: function () {
-
     this.addServices();
     this.addPrice();
-
-    // appData.loger();
-
     this.showResult();
     this.disabled();
   },
@@ -189,12 +186,13 @@ const appData = {
     cmsVariants.addEventListener('input', () => {
 
       switch(true) {
-        case cmsSelect.value === 'other':
+        case cmsSelect.value === "other":
           cmsvariantInput.style.display = 'flex';
+          this.cmsPercent = cmsOtherInput.value;
           break;
-        case cmsSelect.value === '50':
-          cmsvariantInput.style.display = 'none';
+        case  typeof parseFloat(cmsSelect.value) === 'number':
           this.cmsPercent = cmsSelect.value;
+          cmsvariantInput.style.display = 'none';
           break;
       }
       
@@ -246,10 +244,15 @@ const appData = {
     resetChecbox.forEach(element => element.checked = false);
 
     cmsVariants.style.display = 'none';
+    cmsvariantInput.style.display = 'none';
     cmsSelect.value = "";
+    cmsOtherInput.value = "";
     resetSelect.value = "";
     resetSelectInput.value = "";
+    inputTypeRange.value = 0;
+    rangeValue.textContent = 0;
 
+    this.rollback = 0;
     this.cmsPercent = 0;
     this.allCount = 0;
     this.screenPrice = 0;
@@ -267,10 +270,6 @@ const appData = {
 
     screenBlock = screenBlock.slice(0, 1);
   },
-
-  loger: function () {
-
-  }
 
 }
 appData.init();
